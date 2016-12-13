@@ -52,11 +52,20 @@ func TestEurateXmlMapper(t *testing.T) {
 
 	m := eurateXmlMapper(xmlSting)
 
-	input := "NZD"
-	expected := 1.4793
-	actual := m[input]
-	if actual != expected {
-		t.Errorf("eurateXmlMapper(%s) == %f, expected %f", input, actual, expected)
+	var examples = []struct {
+		input string
+		expected float64
+	}{
+		{"USD", 1.0596},
+		{"NZD", 1.4793},
+		{"ZAR", 14.5441},
+	}
+
+	for _, example := range examples {
+		actual := m[example.input]
+		if actual != example.expected {
+			t.Errorf("eurateXmlMapper(%s) == %f, expected %f", example.input, actual, example.expected)
+		}
 	}
 
 }
