@@ -11,7 +11,7 @@ type Query struct {
 
 type Rate struct {
 	Currency string `xml:"currency,attr"`
-    Rate float64 `xml:"rate,attr"`
+	Rate float64 `xml:"rate,attr"`
 }
 
 func eurateXmlMapper(xmlString string) map[string]float64 {
