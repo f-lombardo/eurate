@@ -83,8 +83,6 @@ func TestXmlMapper(t *testing.T) {
 </gesmes:Envelope>`
 
 
-	m := XmlMapper(xmlSting)
-
 	var examples = []struct {
 		date string
 		currency string
@@ -98,6 +96,8 @@ func TestXmlMapper(t *testing.T) {
 		{"2016-12-09", "NZD", 1.4745},
 		{"2016-12-09", "ZAR", 14.545},
 	}
+
+	m := XmlMapper(xmlSting)
 
 	for _, example := range examples {
 		actual := m[example.date][example.currency]
