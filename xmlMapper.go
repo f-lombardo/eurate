@@ -43,7 +43,5 @@ func XmlMapper(xmlString string) RatesForDates {
 		}
 	}
 
-	println(result)
-
 	return result
 }
