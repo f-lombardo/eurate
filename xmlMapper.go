@@ -25,17 +25,23 @@ type Rate struct {
 type RateForCurrencies map[string]float64
 type RatesForDates map[string]RateForCurrencies
 
-func XmlMapper(xmlString string) RatesForDates {
-	result :=  make(RatesForDates)
+func XmlExtractor(xmlString string) []DailyRate {
 	q := Query{}
 	err := xml.Unmarshal([]byte(xmlString), &q)
 
 	if err != nil {
 		fmt.Printf("error: %v", err)
-		return result
 	}
 
-	for _, day := range q.DayList {
+	return q.DayList
+}
+
+func XmlMapper(xmlString string) RatesForDates {
+	result :=  make(RatesForDates)
+
+	dayList := XmlExtractor(xmlString)
+
+	for _, day := range dayList {
 		dailyRates := make(RateForCurrencies)
 		result[day.Date] = dailyRates
 		for _, rate := range day.RatesList {
